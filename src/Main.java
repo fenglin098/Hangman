@@ -10,16 +10,24 @@ public class Main {
         Random r = new Random();
         int randomNum = r.nextInt(10);
         String chosenWord = hangman.get(randomNum);
-        System.out.println(chosenWord);
-        System.out.println(chosenWord.length());
-        String init=chosenWord.replaceAll(String, "-");
-        char[] userGuess=init.toCharArray();
-        System.out.println("Enter your guess: ");
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.next();
-        if (hangman.contains(userInput)) {
-            System.out.println("Your guess so far: "+);
+        System.out.println(chosenWord);//randomize a word for guessing
+        char[] answer= chosenWord.toCharArray();//convert the randomized word to a char array
+        char[] guessArr2 = new char[answer.length];
+        for (int i=0; i<answer.length; i++){
+            guessArr2[i] = '*';
+        }System.out.print("Welcome, let's play hangman!\nHere is a word I am thinking of: "+guessArr2);
 
-        }
-    }
+
+//        System.out.println("Enter your guess: ");
+//        Scanner sc = new Scanner(System.in);
+//        String userInput = sc.next().toLowercase();
+//        if (hangman.contains(userInput)) {
+//            guessArr.indexOf(userInput);
+//            System.out.println("Your guess so far: "+ userInput);
+//        }
+//
+//
+
+//
+}
 }
