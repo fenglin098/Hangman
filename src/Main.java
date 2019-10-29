@@ -1,3 +1,6 @@
+import org.w3c.dom.ls.LSOutput;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -11,23 +14,47 @@ public class Main {
         int randomNum = r.nextInt(10);
         String chosenWord = hangman.get(randomNum);
         System.out.println(chosenWord);//randomize a word for guessing
-        char[] answer= chosenWord.toCharArray();//convert the randomized word to a char array
-        char[] guessArr2 = new char[answer.length];
-        for (int i=0; i<answer.length; i++){
-            guessArr2[i] = '*';
-        }System.out.print("Welcome, let's play hangman!\nHere is a word I am thinking of: "+guessArr2);
+        char[] answerArr = chosenWord.toCharArray();//convert the randomized word to a char array
+        char[] guessArr = new char[answerArr.length];
+        for (int i = 0; i < answerArr.length; i++) {
+            guessArr[i] = '*';
+        }
+        System.out.print("Welcome, let's play hangman!\nHere is a word I am thinking of: ");
+        System.out.println(guessArr);
+        int count = 1;
+        do {
+            System.out.println("Enter your guess: ");
+            Scanner sc = new Scanner(System.in);
+            String userInput = sc.next().toLowerCase();
+            if (userInput.length() > 1 && userInput.equalsIgnoreCase(chosenWord)) {
+                System.out.println("You've won! The word was " + chosenWord);
+                break;
+            } else if (userInput.length() == 1) {
+                char userInputChar = userInput.charAt(0);
+                if (hangman.contains(userInput)) {
+                    for (int j = 0; j < answerArr.length; j++) {
+                        if (answerArr[j] == userInputChar) {
+                            guessArr[j] = userInputChar;
+                        }
+                        System.out.println("Your guess so far: " + guessArr);
+                    }
+                } else {
+                    count++;
+                    System.out.println("You have guessed incorrectly " + count + "/6 times.");
+                    if (count==6){
+                        System.out.println("Sorry, you have no more guesses left. The word was "+chosenWord);
+                    }
+                }
+            }
 
+        } while (count <= 6);
 
-//        System.out.println("Enter your guess: ");
-//        Scanner sc = new Scanner(System.in);
-//        String userInput = sc.next().toLowercase();
-//        if (hangman.contains(userInput)) {
-//            guessArr.indexOf(userInput);
-//            System.out.println("Your guess so far: "+ userInput);
-//        }
-//
-//
-
-//
+    }
 }
-}
+
+
+
+
+
+
+
